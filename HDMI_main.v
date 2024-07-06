@@ -1,0 +1,88 @@
+module HDMI_main(
+	input clock_25, 
+	input clock_50,
+	input reset,
+	input switch_red, 
+	input switch_blue, 
+	input switch_green,
+	output reg h_sync,
+	output reg v_sync,
+	output reg data_enable, 
+	output reg vga_clk,
+	output [23:0] rgb_channel
+);
+
+reg [9:0] pixel_h, pixel_v;
+
+initial begin
+	h_sync 		= 1;
+	v_sync 		= 1;
+	pixel_h		= 0;
+	pixel_v		= 0;
+	data_enable	= 0;
+	vga_clk 		= 0;
+end
+
+always @(posedge clock_25 or posedge reset) begin
+	if(reset) begin	
+		h_sync 		<= 1;
+		v_sync 		<= 1;
+		pixel_h		<= 0;
+		pixel_v		<= 0;
+	end
+	else begin
+		if(pixel_h == 0 && pixel_v!=524) begin
+			pixel_h <= pixel_h +1'b1;
+			pixel_v <= pixel_v +1'b1;
+		end
+		else if (pixel_h== 0 && pixel_v == 524) begin
+			pixel_h <= pixel_h + 1'b1;
+			pixel_v <= 0;
+		end
+		 else if(pixel_h<=640) pixel_h <= pixel_h + 1'b1;
+		// Front Porch
+		else if(pixel_h<=656) pixel_h <= pixel_h + 1'b1;
+		// Sync Pulse
+		else if(pixel_h<=752) begin
+		pixel_h <= pixel_h+ 1'b1;
+		h_sync  <= 0;
+		end
+    // Back Porch
+		else if(pixel_h<799) begin
+		pixel_h <= pixel_h+1'b1;
+		h_sync  <= 1;
+		end
+		else pixel_h<=0; // pixel 800
+	
+	
+		// Sync Pulse
+		if(pixel_v == 491 || pixel_v == 492)
+		v_sync <= 0;
+		else
+		v_sync <= 1;
+	end
+end
+
+
+always @(posedge clock_25 or posedge reset) begin
+	if(reset) data_enable <= 0;
+	else begin	
+		if(pixel_h >= 0 && pixel_h <640 && pixel_v >= 0 && pixel_v < 480)
+			data_enable <=1;
+		else
+			data_enable <=0;
+	end
+end
+
+initial vga_clk = 0;
+
+always @(posedge clock_50 or posedge reset) begin
+	if(reset) vga_clk <=0;
+	else 	vga_clk <= ~vga_clk;
+end
+
+assign rgb_channel[23:16]	= (switch_red)? 8'd255 : 8'd0;
+assign rgb_channel[15:8]	= (switch_green)? 8'd255: 8'd0;
+assign rgb_channel[7:0] 	= (switch_blue)? 8'd255 : 8'd0;
+
+endmodule

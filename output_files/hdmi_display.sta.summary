@@ -1,0 +1,165 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1100mV 100C Model Setup 'CLOCK_50'
+Slack : -4.756
+TNS   : -4.756
+
+Type  : Slow 1100mV 100C Model Setup 'i2c_hdmi:i2c_hdmi|control_clk'
+Slack : -2.865
+TNS   : -128.286
+
+Type  : Slow 1100mV 100C Model Setup 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 36.805
+TNS   : 0.000
+
+Type  : Slow 1100mV 100C Model Hold 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.344
+TNS   : 0.000
+
+Type  : Slow 1100mV 100C Model Hold 'CLOCK_50'
+Slack : 0.438
+TNS   : 0.000
+
+Type  : Slow 1100mV 100C Model Hold 'i2c_hdmi:i2c_hdmi|control_clk'
+Slack : 0.521
+TNS   : 0.000
+
+Type  : Slow 1100mV 100C Model Minimum Pulse Width 'i2c_hdmi:i2c_hdmi|control_clk'
+Slack : -0.538
+TNS   : -45.100
+
+Type  : Slow 1100mV 100C Model Minimum Pulse Width 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.666
+TNS   : 0.000
+
+Type  : Slow 1100mV 100C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 8.972
+TNS   : 0.000
+
+Type  : Slow 1100mV 100C Model Minimum Pulse Width 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 19.266
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Setup 'CLOCK_50'
+Slack : -4.569
+TNS   : -4.569
+
+Type  : Slow 1100mV -40C Model Setup 'i2c_hdmi:i2c_hdmi|control_clk'
+Slack : -2.810
+TNS   : -127.276
+
+Type  : Slow 1100mV -40C Model Setup 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 36.806
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Hold 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.330
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Hold 'CLOCK_50'
+Slack : 0.458
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Hold 'i2c_hdmi:i2c_hdmi|control_clk'
+Slack : 0.467
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Minimum Pulse Width 'i2c_hdmi:i2c_hdmi|control_clk'
+Slack : -0.538
+TNS   : -44.312
+
+Type  : Slow 1100mV -40C Model Minimum Pulse Width 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.666
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 8.998
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Minimum Pulse Width 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 19.199
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Setup 'CLOCK_50'
+Slack : -3.482
+TNS   : -3.482
+
+Type  : Fast 1100mV 100C Model Setup 'i2c_hdmi:i2c_hdmi|control_clk'
+Slack : -1.234
+TNS   : -50.013
+
+Type  : Fast 1100mV 100C Model Setup 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 38.487
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Hold 'i2c_hdmi:i2c_hdmi|control_clk'
+Slack : 0.170
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Hold 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.187
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Hold 'CLOCK_50'
+Slack : 0.190
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Minimum Pulse Width 'i2c_hdmi:i2c_hdmi|control_clk'
+Slack : 0.022
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Minimum Pulse Width 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.666
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 9.029
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Minimum Pulse Width 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 19.552
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Setup 'CLOCK_50'
+Slack : -2.680
+TNS   : -2.680
+
+Type  : Fast 1100mV -40C Model Setup 'i2c_hdmi:i2c_hdmi|control_clk'
+Slack : -0.992
+TNS   : -39.155
+
+Type  : Fast 1100mV -40C Model Setup 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 38.650
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Hold 'i2c_hdmi:i2c_hdmi|control_clk'
+Slack : 0.125
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Hold 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.163
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Hold 'CLOCK_50'
+Slack : 0.179
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Minimum Pulse Width 'i2c_hdmi:i2c_hdmi|control_clk'
+Slack : 0.078
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Minimum Pulse Width 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.666
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 9.071
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Minimum Pulse Width 'pll_25|pll_25_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'
+Slack : 19.546
+TNS   : 0.000
+
+------------------------------------------------------------

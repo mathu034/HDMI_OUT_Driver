@@ -1,0 +1,10 @@
+vsim -gui work.hdmi_tb
+# vsim -gui work.hdmi_tb 
+# Start time: 02:22:22 on Jun 13,2022
+# Loading work.hdmi_tb
+# Loading work.HDMI_main
+# WARNING: No extended dataflow license exists
+add wave sim:/hdmi_tb/*
+run -all
+# End time: 20:14:24 on Jun 13,2022, Elapsed time: 17:52:02
+# Errors: 0, Warnings: 1

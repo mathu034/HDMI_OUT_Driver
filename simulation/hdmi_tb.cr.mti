@@ -1,0 +1,15 @@
+C:/Users/User/Desktop/HDMI_full_project/hdmi_display.v {1 {vlog -work work -stats=none C:/Users/User/Desktop/HDMI_full_project/hdmi_display.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module hdmi_display
+
+Top level modules:
+	hdmi_display
+
+} {} {}} C:/Users/User/Desktop/HDMI_full_project/simulation/hdmi_tb.v {1 {vlog -work work -stats=none {C:\Users\User\Desktop\HDMI_full_project\simulation\hdmi_tb.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module hdmi_tb
+
+Top level modules:
+	hdmi_tb
+
+} {} {}}

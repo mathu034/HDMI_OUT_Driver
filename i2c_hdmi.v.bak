@@ -1,0 +1,145 @@
+
+
+module i2c_hdmi (
+	input clock,
+	input reset_n,
+	output i2c_scl,
+	inout i2c_sda,
+	input hdmi_tx,
+	output start
+
+);
+
+reg [15:0] count;
+reg [23:0] i2c_data;
+reg control_clk;
+reg i2c_start;
+wire i2c_stop;
+wire i2c_ack;
+reg [15:0] LUT_DATA;
+reg [5:0] LUT_INDEX;
+reg [3:0] mSetup_ST;
+reg ready;
+
+parameter clk_freq = 50000000;
+parameter i2c_freq = 20000;
+
+parameter LUT_SIZE = 31;
+
+always@(posedge clock or negedge reset_n)
+beginZ
+	if(!reset_n) begin	
+		count 		<= 0;
+		control_clk <=0;
+	end
+	else begin 
+		if(count <(clk_freq/i2c_freq)) begin	
+			count <= count+1'b1;
+		end
+		else begin
+			count 		<= 0;
+			control_clk <= ~control_clk;
+		end
+	end
+end
+
+
+I2C_Controller unit1(
+/** 
+
+**/
+
+
+)
+
+
+always@ (posedge control_clk or negedge reset_n)
+begin 
+	if(!reset_n) begin
+		ready 	  <= 0;
+		LUT_INDEX <= 0;
+		mSetup_ST <= 0;
+		i2c_start <= 0;
+	end
+	
+	else begin
+		if(LUT_INDEX<LUT_SIZE) begin
+			ready <= 0;
+			case(mSetup_ST)
+			0:	begin 
+					i2c_sda <={8'h72, LUT_DATA};
+					i2c_start <= 1;
+					mSetup_ST <= 1;
+				end
+			
+			1:	begin 
+					if(i2c_stop) begin
+						if(!i2c_ack)
+							mSetup_ST <= 2;
+						else begin
+							mSetup_ST <= 0;
+							i2c_start <= 0;
+						end
+					end
+				end
+				
+			2:	begin
+					LUT_INDEX <= LUT_INDEX + 1'b1;
+					mSetup_ST <= 0;
+				end
+			endcase
+		end
+		else begin 
+			ready <= 1;
+			if(!hdmi_tx) begin
+				LUT_INDEX <=0;
+			end
+			else
+				LUT_INDEX <= LUT_INDEX;
+		end
+	end
+end
+
+
+always
+begin
+	case(LUT_INDEX)
+	
+	//	Video Config Data
+	0	:	LUT_DATA	<=	16'h9803;  //Must be set to 0x03 for proper operation
+	1	:	LUT_DATA	<=	16'h0100;  //Set 'N' value at 6144
+	2	:	LUT_DATA	<=	16'h0218;  //Set 'N' value at 6144
+	3	:	LUT_DATA	<=	16'h0300;  //Set 'N' value at 6144
+	4	:	LUT_DATA	<=	16'h1470;  // Set Ch count in the channel status to 8.
+	5	:	LUT_DATA	<=	16'h1520;  //Input 444 (RGB or YCrCb) with Separate Syncs, 48kHz fs
+	6	:	LUT_DATA	<=	16'h1630;  //Output format 444, 24-bit input
+	7	:	LUT_DATA	<=	16'h1846;  //Disable CSC
+	8	:	LUT_DATA	<=	16'h4080;  //General control packet enable
+	9	:	LUT_DATA	<=	16'h4110;  //Power down control
+	10	:	LUT_DATA	<=	16'h49A8;  //Set dither mode - 12-to-10 bit
+	11	:	LUT_DATA	<=	16'h5510;  //Set RGB in AVI infoframe
+	12	:	LUT_DATA	<=	16'h5608;  //Set active format aspect
+	13	:	LUT_DATA	<=	16'h96F6;  //Set interrup
+	14	:	LUT_DATA	<=	16'h7307;  //Info frame Ch count to 8
+	15	:	LUT_DATA	<=	16'h761f;  //Set speaker allocation for 8 channels
+	16	:	LUT_DATA	<=	16'h9803;  //Must be set to 0x03 for proper operation
+	17	:	LUT_DATA	<=	16'h9902;  //Must be set to Default Value
+	18	:	LUT_DATA	<=	16'h9ae0;  //Must be set to 0b1110000
+	19	:	LUT_DATA	<=	16'h9c30;  //PLL filter R1 value
+	20	:	LUT_DATA	<=	16'h9d61;  //Set clock divide
+	21	:	LUT_DATA	<=	16'ha2a4;  //Must be set to 0xA4 for proper operation
+	22	:	LUT_DATA	<=	16'ha3a4;  //Must be set to 0xA4 for proper operation
+	23	:	LUT_DATA	<=	16'ha504;  //Must be set to Default Value
+	24	:	LUT_DATA	<=	16'hab40;  //Must be set to Default Value
+	25	:	LUT_DATA	<=	16'haf16;  //Select HDMI mode
+	26	:	LUT_DATA	<=	16'hba60;  //No clock delay
+	27	:	LUT_DATA	<=	16'hd1ff;  //Must be set to Default Value
+	28	:	LUT_DATA	<=	16'hde10;  //Must be set to Default for proper operation
+	29	:	LUT_DATA	<=	16'he460;  //Must be set to Default Value
+	30	:	LUT_DATA	<=	16'hfa7d;  //Nbr of times to look for good phase
+
+	default:		LUT_DATA	<=	16'h9803;
+	endcase
+end
+
+endmodule

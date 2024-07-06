@@ -1,0 +1,53 @@
+module top_module(
+	input CLOCK_50, RESET_N, SWITCH_RED,SWITCH_GREEN, SWITCH_BLUE,
+	
+	output [23:0] HDMI_TX_DATA,
+	output HDMI_TX_VSYNC, HDMI_TX_HSYNC, HDMI_TX_DE, HDMI_TX_CLK, 
+	input HDMI_TX_INT, HDMI_I2C_SDA, HDMI_I2C_SCL, START
+);
+	
+wire CLOCK_25, LOCK;
+wire RESET;
+
+assign RESET=~RESET_N;
+	
+pll_25 pll_25(
+.refclk(CLOCK_50),
+.rst(RESET),
+.outclk_0(CLOCK_25),
+.locked(LOCK)
+);
+
+vgaHdmi vgaHdmi (
+  // input
+  .clock_25     (CLOCK_25),
+  .clock_50    	(CLOCK_50),
+  .reset       	(~LOCK),
+  .h_sync       (HDMI_TX_HSYNC),
+  .v_sync       (HDMI_TX_VSYNC),
+  .switch_red   (SWITCH_RED),
+  .switch_green (SWITCH_GREEN),
+  .switch_blue	(SWITCH_BLUE),
+
+  // output
+  .data_enable (HDMI_TX_DE),
+  .vga_clk     (HDMI_TX_CLK),
+  .rgb_channel (HDMI_TX_DATA)
+);
+
+// **I2C Interface for ADV7513 initial config**
+I2C_HDMI_Config #(
+  .clk_freq (50000000), // 50MHz
+  .i2c_freq (20000)    // 20kHz for i2c clock
+  )
+
+  I2C_HDMI_Config (
+  .clock_50 (CLOCK_50),
+  .reset_n  (RESET_N),
+  .i2c_sdl  (HDMI_I2C_SCL),
+  .i2c_sda  (HDMI_I2C_SDA),
+  .hdmi_tx	(HDMI_TX_INT),
+  .start    (START)
+);
+
+endmodule
