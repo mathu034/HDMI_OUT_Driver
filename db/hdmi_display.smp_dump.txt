@@ -1,0 +1,6 @@
+
+State Machine - |hdmi_display|i2c_hdmi:i2c_hdmi|setup_state
+Name setup_state.0000 setup_state.0010 setup_state.0001 
+setup_state.0000 0 0 0 
+setup_state.0001 1 0 1 
+setup_state.0010 1 1 0 
